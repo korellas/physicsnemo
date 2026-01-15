@@ -129,6 +129,8 @@ if PYG_AVAILABLE:
             src_idx, dst_idx = graph[graph.edge_types[0]].edge_index.long()
         else:
             src_idx, dst_idx = graph.edge_index.long()
+        src_idx = src_idx.to(src_feat.device)
+        dst_idx = dst_idx.to(dst_feat.device)
         cat_feat = torch.cat((efeat, src_feat[src_idx], dst_feat[dst_idx]), dim=1)
         return cat_feat
 
